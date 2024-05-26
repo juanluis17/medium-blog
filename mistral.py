@@ -8,6 +8,7 @@ from datasets import load_dataset
 
 dataset = load_dataset('Unbabel/TowerBlocks-v0.2', split='train')
 dataset = dataset.filter(lambda example: example['task'] == "machine_translation")
+dataset = dataset.class_encode_column("lang")
 dataset =  dataset.train_test_split(test_size=0.2,shuffle = True,stratify_by_column="lang")
 train = dataset["train"]
 dev = dataset["test"]
