@@ -7,8 +7,10 @@ login()
 from datasets import load_dataset
 
 dataset = load_dataset('Unbabel/TowerBlocks-v0.2', split='train')
-train = dataset.filter(lambda example: example['split']=="train" and example['task']=="machine_translation")
-dev = dataset.filter(lambda example: example['split']=="dev" and example['task']=="machine_translation")
+dataset = dataset.filter(lambda example: example['task'] == "machine_translation")
+dataset =  dataset.train_test_split(test_size=0.2,shuffle = True,stratify_by_column="lang")
+train = dataset["train"]
+dev = dataset["test"]
 print(len(train), len(dev))
 
 
