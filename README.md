@@ -1,1 +1,1 @@
-# medium-scripts
+# medium-blog

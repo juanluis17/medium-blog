@@ -1,0 +1,43 @@
+services:
+  jaeger:
+    networks:
+      backend:
+        # This is the host name used in Prometheus scrape configuration.
+        aliases: [ spm_metrics_source ]
+    image: jaegertracing/jaeger:${JAEGER_VERSION:-latest}
+    restart: always
+    environment:
+      - OTEL_ENABLED=true
+    volumes:
+      - "./jaeger-ui.json:/etc/jaeger/jaeger-ui.json"
+      - "./config.yml:/etc/jaeger/config.yml"
+    command: ["--config", "/etc/jaeger/config.yml"]
+    ports:
+      - "0.0.0.0:16686:16686"
+      - "0.0.0.0:8888:8888"
+      - "0.0.0.0:8889:8889"
+      - "0.0.0.0:4317:4317" # OTLP gRPC
+      - "0.0.0.0:4318:4318" # OTLP HTTP
+
+  prometheus:
+    networks:
+      - backend
+    image: prom/prometheus:v3.1.0
+    restart: always
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
