@@ -59,8 +59,7 @@ docker-compose logs -f <service_name>
 ## ☕ Support This Project
 If you found this project useful, consider supporting me:
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20Me-orange)](buymeacoffee.com/juanluis1702)
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Me-blue?logo=kofi)](ko-fi.com/juanluis1702)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20Me-orange)](https://buymeacoffee.com/juanluis1702)
 
 
 Your support helps keep this project maintained and improves future features! 🚀
